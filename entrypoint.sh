@@ -35,15 +35,10 @@ else
   DEST_COPY="$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
 fi
 
-echo "Copying contents to git repo"
+echo "Updating README.md"
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER
-if [ -z "$INPUT_USE_RSYNC" ]
-then
-  cp -R "$INPUT_SOURCE_FILE" "$DEST_COPY"
-else
-  echo "rsync mode detected"
-  rsync -avrh "$INPUT_SOURCE_FILE" "$DEST_COPY"
-fi
+awk '!p;/A List of/{p=1}' "$DEST_COPY" > README.md
+awk '/데이터셋/{p=1}p' "$INPUT_SOURCE_FILE" >> README.md
 
 cd "$CLONE_DIR"
 
