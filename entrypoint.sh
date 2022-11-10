@@ -37,7 +37,7 @@ fi
 
 echo "Updating README.md"
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER
-awk '!p;/A List of/{p=1}' "$DEST_COPY" > README.md
+awk '!p;/A List of/{p=1}' "$DEST_COPY"/README.md > README.md
 awk '/데이터셋/{p=1}p' "$INPUT_SOURCE_FILE" >> README.md
 
 cd "$CLONE_DIR"
